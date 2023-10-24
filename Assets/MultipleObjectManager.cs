@@ -49,9 +49,9 @@ public class MultipleObjectManager : MonoBehaviour
             }
         }
 
-
         foreach (ARTrackedImage trackedImage in args.removed)
         {
+            // TODO: trackedImage의 child 비활성화 필요 -> Log로 찍어볼 것
             if (trackedImage.transform.childCount > 0)
             {
                 trackedImage.transform.GetChild(0).gameObject.SetActive(false);
