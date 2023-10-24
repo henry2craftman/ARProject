@@ -14,25 +14,47 @@ public class MultipleObjectManager : MonoBehaviour
         imageManager = GetComponent<ARTrackedImageManager>();
 
         imageManager.trackedImagesChanged += OnImageTrackedEvent;
+
+        logText.text = "";
     }
 
     void OnImageTrackedEvent(ARTrackedImagesChangedEventArgs args)
     {
-        logText.text = "";
-
         foreach (ARTrackedImage trackedImage in args.added)
         {
             string imageName = trackedImage.referenceImage.name;
-
-            logText.text = logText.text + "\n" + imageName;
+            //logText.text = logText.text + "\n" + imageName; // OK
 
             GameObject prefab = Resources.Load<GameObject>(imageName);
 
             if (prefab != null)
             {
-                GameObject obj = Instantiate(prefab, trackedImage.transform.position, trackedImage.transform.rotation);
+                if (trackedImage.transform.childCount < 1)
+                {
+                    GameObject obj = Instantiate(prefab, trackedImage.transform.position, trackedImage.transform.rotation);
+                    obj.transform.SetParent(trackedImage.transform);
+                    logText.text = logText.text + "\n" + obj.name + "is added.";
+                }
+            }
+        }
 
-                logText.text = logText.text + "\n" + obj.name + "이 추가 되었습니다.";
+        foreach (ARTrackedImage trackedImage in args.updated)
+        {
+            if (trackedImage.transform.childCount > 0)
+            {
+                trackedImage.transform.gameObject.SetActive(true);
+                trackedImage.transform.GetChild(0).position = trackedImage.transform.position;
+                trackedImage.transform.GetChild(0).rotation = trackedImage.transform.rotation;
+                // trackedImage.transform.GetChild(0).gameObject -> Canvas로 출력됨
+            }
+        }
+
+
+        foreach (ARTrackedImage trackedImage in args.removed)
+        {
+            if (trackedImage.transform.childCount > 0)
+            {
+                trackedImage.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }
