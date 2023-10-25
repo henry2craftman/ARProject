@@ -8,7 +8,6 @@ public class LocationManager : MonoBehaviour
     [SerializeField] List<GPSData> restaurantDB = new List<GPSData>();
     public List<GPSData> RestaurantDB { get { return restaurantDB; } }
     [SerializeField] List<Transform> restaurants = new List<Transform>();
-
     void Awake()
     {
         foreach(GPSData gps in restaurantDB)
@@ -20,17 +19,32 @@ public class LocationManager : MonoBehaviour
 
             restaurants.Add(restaurantObj.transform);
         }
+
     }
 
-    public void SetActiveObject(string name, bool isActive)
+    public bool SetActiveObject(string name, bool isActive)
     {
         foreach(Transform restaurant in restaurants)
         {
             if (restaurant.name.Equals(name))
             {
                 restaurant.gameObject.SetActive(isActive);
+
+                return true;
             }
         }
 
+        return false;
+    }
+
+    public void LocateObject(string name, float xCoordinate, float yCoordinate)
+    {
+        foreach (Transform restaurant in restaurants)
+        {
+            if (restaurant.name.Equals(name))
+            {
+                restaurant.transform.position = new Vector3(xCoordinate, 0, yCoordinate);
+            }
+        }
     }
 }

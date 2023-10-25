@@ -11,12 +11,12 @@ public class GPSManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI latitudeText;
     [SerializeField] TextMeshProUGUI longtitudeText;
     [SerializeField] float range = 10f;
-    double latitutde = 0;
+    double latitude = 0;
     double longtitude = 0;
     bool isReceived = false;
     int waitTime = 0;
     LocationManager locationManager;
-    
+    GyroManager gyroManager;
 
     /// <summary>
     /// 
@@ -24,11 +24,12 @@ public class GPSManager : MonoBehaviour
     private void Awake()
     {
         locationManager = FindObjectOfType<LocationManager>();
+        gyroManager = FindObjectOfType<GyroManager>();
     }
 
     private void Start()
     {
-        CalculateDistance();
+        //CalculateDistance();
 
         StartCoroutine(TurnOnGPS());
     }
@@ -36,6 +37,7 @@ public class GPSManager : MonoBehaviour
     /// <summary>
     /// latitude를 X로, Longtitude를 Y로 정한 후, 스케일 요소를 통해 distance를 100m 단위로 구합니다. 
     /// 파라미터 값이 소수점 6째 자리까지 존재해야 함.(예: 위도 37.513856 일때, 3.856(100m 단위로 변환)
+    /// 최종적으로 3.856 * 100 -> m단위로 값을 반환
     /// </summary>
     /// <param name="startX"></param>
     /// <param name="startY"></param>
@@ -63,18 +65,63 @@ public class GPSManager : MonoBehaviour
 
         float distance = Mathf.Sqrt(Mathf.Pow(endPointX - startPointX, 2) + Mathf.Pow(endPointY - startPointY, 2));
 
-        return distance;
+        return distance * 100; // m단위로 변환
     }
 
     IEnumerator TurnOnGPS()
     {
-        InitializePermission();
+        //yield return InitializePermission();
+        if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+        {
+            Permission.RequestUserPermission(Permission.FineLocation);
 
-        SetGPSInfo();
+            while (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
+            {
+                latitudeText.text = "Please accept GPS permission.\nThe application will be quit in 3 seconds";
+                longtitudeText.text = "";
 
-        InitializeGPS();
+                yield return new WaitForSeconds(3);
 
-        while(isReceived)
+                Application.Quit();
+            }
+        }
+
+        if (!Input.location.isEnabledByUser)
+        {
+            latitudeText.text = "GPS is not allowed";
+            yield break;
+        }
+        else
+        {
+            latitudeText.text = "GPS is allowed";
+        }
+
+        //yield return InitializeGPS();
+        while (Input.location.status == LocationServiceStatus.Initializing)
+        {
+            if (Input.location.status == LocationServiceStatus.Running)
+            {
+                latitudeText.text = "GPS is running!";
+                break;
+            }
+
+            yield return new WaitForSeconds(1);
+            waitTime++;
+            latitudeText.text = "GPS Initializing: " + waitTime + "s";
+        }
+
+        if (Input.location.status == LocationServiceStatus.Failed)
+        {
+            latitudeText.text = "GPS initialization failed";
+            isReceived = false;
+        }
+        else
+        {
+            isReceived = true;
+            waitTime = 0;
+        }
+
+        while (isReceived)
         {
             SetGPSInfo();
 
@@ -90,16 +137,36 @@ public class GPSManager : MonoBehaviour
     private void CalculateDistance()
     {
         List<GPSData> restaurantDB = locationManager.RestaurantDB;
+        //longtitudeText.text += "\nrestaurantDB count: " + restaurantDB.Count;
+        //longtitudeText.text += "\nlatitude: " + latitude + " / longtitude: " + longtitude;
+
+        if (latitude == 0 || longtitude == 0)
+        {
+            return;
+        }
 
         foreach (GPSData gps in  restaurantDB)
         {
-            // TODO: Distance 함수 수정해야함
-            float distance = Distance(37.513856, 127.029549, gps.latitude, gps.longtitutitude);
+            // ex) 위도 37.513856, 경도 127.029549
+            float distance = Distance(latitude, longtitude, gps.latitude, gps.longtitude);
 
-            if(distance * 100 <= range)
+            if(distance <= range)
             {
-                print(gps.restaurantName + " / " + distance * 100);
-                locationManager.SetActiveObject(gps.restaurantName, true);
+                //longtitudeText.text += "\n" + gps.restaurantName + " is within " + (distance) + "m";
+                bool isActive = locationManager.SetActiveObject(gps.restaurantName, true);
+                longtitudeText.text += "\nGyroRotationY: " + gyroManager.GyroRotation.eulerAngles.z;
+
+                // gyroManager.GyroRotation.eulerAngles.y = roll
+                float newX = Mathf.Cos(gyroManager.GyroRotation.eulerAngles.z) * distance;
+                float newY = Mathf.Sin(gyroManager.GyroRotation.eulerAngles.z) * distance;
+                longtitudeText.text += "\n" + gps.restaurantName + " is Active: " + isActive + " / newX: " + newX + " / newY: " + newY;
+
+                print(newX + " / " + newY);
+                locationManager.LocateObject(gps.restaurantName, newX, newY);
+            }
+            else
+            {
+                locationManager.SetActiveObject(gps.restaurantName, false);
             }
         }
     }
@@ -166,10 +233,10 @@ public class GPSManager : MonoBehaviour
         Input.location.Start();
 
         LocationInfo location = Input.location.lastData;
-        latitutde = location.latitude;
+        latitude = location.latitude;
         longtitude = location.longitude;
 
-        latitudeText.text = "Latitude: " + latitutde.ToString();
+        latitudeText.text = "Latitude: " + latitude.ToString();
         longtitudeText.text = "Longtitude: " + longtitude.ToString();
     }
 }
