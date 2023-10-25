@@ -8,6 +8,7 @@ public class LocationManager : MonoBehaviour
     [SerializeField] List<GPSData> restaurantDB = new List<GPSData>();
     public List<GPSData> RestaurantDB { get { return restaurantDB; } }
     [SerializeField] List<Transform> restaurants = new List<Transform>();
+
     void Awake()
     {
         foreach(GPSData gps in restaurantDB)

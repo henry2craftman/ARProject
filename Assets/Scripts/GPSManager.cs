@@ -18,9 +18,6 @@ public class GPSManager : MonoBehaviour
     LocationManager locationManager;
     GyroManager gyroManager;
 
-    /// <summary>
-    /// 
-    /// </summary>
     private void Awake()
     {
         locationManager = FindObjectOfType<LocationManager>();
@@ -29,8 +26,6 @@ public class GPSManager : MonoBehaviour
 
     private void Start()
     {
-        //CalculateDistance();
-
         StartCoroutine(TurnOnGPS());
     }
 
@@ -70,62 +65,15 @@ public class GPSManager : MonoBehaviour
 
     IEnumerator TurnOnGPS()
     {
-        //yield return InitializePermission();
-        if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
-        {
-            Permission.RequestUserPermission(Permission.FineLocation);
+        yield return InitializePermission();
 
-            while (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
-            {
-                latitudeText.text = "Please accept GPS permission.\nThe application will be quit in 3 seconds";
-                longtitudeText.text = "";
-
-                yield return new WaitForSeconds(3);
-
-                Application.Quit();
-            }
-        }
-
-        if (!Input.location.isEnabledByUser)
-        {
-            latitudeText.text = "GPS is not allowed";
-            yield break;
-        }
-        else
-        {
-            latitudeText.text = "GPS is allowed";
-        }
-
-        //yield return InitializeGPS();
-        while (Input.location.status == LocationServiceStatus.Initializing)
-        {
-            if (Input.location.status == LocationServiceStatus.Running)
-            {
-                latitudeText.text = "GPS is running!";
-                break;
-            }
-
-            yield return new WaitForSeconds(1);
-            waitTime++;
-            latitudeText.text = "GPS Initializing: " + waitTime + "s";
-        }
-
-        if (Input.location.status == LocationServiceStatus.Failed)
-        {
-            latitudeText.text = "GPS initialization failed";
-            isReceived = false;
-        }
-        else
-        {
-            isReceived = true;
-            waitTime = 0;
-        }
+        yield return InitializeGPS();
 
         while (isReceived)
         {
             SetGPSInfo();
 
-            CalculateDistance();
+            //CalculateDistance();
 
             yield return new WaitForSeconds(1);
 

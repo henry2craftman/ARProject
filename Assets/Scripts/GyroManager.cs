@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GyroManager : MonoBehaviour
 {
     [SerializeField] Transform compass;
+    [SerializeField] TextMeshProUGUI gyroText;
     private bool gyroEnabled;
     private Gyroscope gyro;
     Quaternion gyroRotation = new Quaternion();
     public Quaternion GyroRotation { get { return gyroRotation; } }
+    
 
     private void Awake()
     {
@@ -32,7 +35,9 @@ public class GyroManager : MonoBehaviour
         if (gyroEnabled)
         {
             gyroRotation = gyro.attitude;
-            compass.rotation = Quaternion.Euler(0, -gyroRotation.eulerAngles.y, 0);
+
+            //// TODO: 수정 필요
+            //compass.rotation = Quaternion.Euler(0, -heading, 0);
         }
     }
 }
