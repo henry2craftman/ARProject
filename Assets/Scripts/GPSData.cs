@@ -6,4 +6,13 @@ public class GPSData
     public string restaurantName;
     public double latitude;
     public double longtitude;
+    public bool isCaptued;
+
+    public GPSData(string restaurantName, double latitude, double longtitude, bool isCaptued)
+    {
+        this.restaurantName = restaurantName;
+        this.latitude = latitude;
+        this.longtitude = longtitude;
+        this.isCaptued = isCaptued;
+    }
 }
