@@ -37,6 +37,9 @@ public class AuthenticationManager : MonoBehaviour
         InitializeAuthentication();
     }
 
+    /// <summary>
+    /// Firebase Authentication 초기화 함수
+    /// </summary>
     private void InitializeAuthentication()
     {
         auth = FirebaseAuth.DefaultInstance;
@@ -44,7 +47,11 @@ public class AuthenticationManager : MonoBehaviour
         AuthStateChanged(this, null);
     }
 
-    // Track state changes of the auth object.
+    /// <summary>
+    /// 로그인 상태를 보여주는 함수
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="eventArgs"></param>
     void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
         if (auth.CurrentUser != user)
@@ -62,6 +69,11 @@ public class AuthenticationManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 기본 예제
+    /// </summary>
+    /// <param name="email"></param>
+    /// <param name="password"></param>
     public void SignUp(string email, string password)
     {
         auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
@@ -85,8 +97,14 @@ public class AuthenticationManager : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// UI에 적용되는 함수
+    /// </summary>
     public void SignUp()
     {
+        signUpPanel.SetActive(true);
+        signInPanel.SetActive(false);
+
         StartCoroutine(SignUpAsync(nameInput.text, emailInput.text, passwordInput.text, confirmedPasswordInput.text));
 
         IEnumerator SignUpAsync(string name, string email, string password, string confirmedPassword)
@@ -166,8 +184,6 @@ public class AuthenticationManager : MonoBehaviour
         signInPanel.SetActive(true);
     }
         
-    
-
     public void SignIn()
     {
         auth.SignInWithEmailAndPasswordAsync(signInEmailInput.text, signInPasswordInput.text).ContinueWith(task => {
@@ -197,6 +213,9 @@ public class AuthenticationManager : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// VerificationEmail을 보내는 예시 함수
+    /// </summary>
     public void SendVerificationEmail()
     {
         Firebase.Auth.FirebaseUser user = auth.CurrentUser;
@@ -217,11 +236,5 @@ public class AuthenticationManager : MonoBehaviour
                 Debug.Log("Email sent successfully.");
             });
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
