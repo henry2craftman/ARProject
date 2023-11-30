@@ -12,6 +12,11 @@ public class FirebaseManager : MonoBehaviour
     [SerializeField] string dbURL;
     [SerializeField] GPSDataList data = new GPSDataList();
 
+    private void Awake()
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {

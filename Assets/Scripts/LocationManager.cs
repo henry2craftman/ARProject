@@ -20,7 +20,6 @@ public class LocationManager : MonoBehaviour
 
             restaurants.Add(restaurantObj.transform);
         }
-
     }
 
     public bool SetActiveObject(string name, bool isActive)
