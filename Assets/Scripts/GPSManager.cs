@@ -4,15 +4,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Android;
+using CesiumForUnity;
+using UnityEngine.UI;
 
 // 목적: GPS 위치 사용에 대한 권한 확인 및 GPS 위치 표시
 public class GPSManager : MonoBehaviour
 {
+    [SerializeField] CesiumForUnity.CesiumGeoreference georeference;
     [SerializeField] TextMeshProUGUI latitudeText;
     [SerializeField] TextMeshProUGUI longtitudeText;
     [SerializeField] float range = 10f;
+    [SerializeField] Text debugText;
     double latitude = 0;
     double longtitude = 0;
+    private float altitude;
     bool isReceived = false;
     int waitTime = 0;
     LocationManager locationManager;
@@ -22,6 +27,7 @@ public class GPSManager : MonoBehaviour
     {
         locationManager = FindObjectOfType<LocationManager>();
         gyroManager = FindObjectOfType<GyroManager>();
+        georeference = FindObjectOfType<CesiumGeoreference>();
     }
 
     private void Start()
@@ -73,12 +79,23 @@ public class GPSManager : MonoBehaviour
         {
             SetGPSInfo();
 
+            UpdateGeospatialCretor();
+
             //CalculateDistance();
 
             yield return new WaitForSeconds(1);
 
             waitTime++;
         }
+    }
+
+    private void UpdateGeospatialCretor()
+    {
+        georeference.latitude = latitude;
+        georeference.longitude = longtitude;
+        georeference.height = altitude;
+
+        debugText.text += $"latitude, longitude, height\n{georeference.latitude}, {georeference.longitude}, {georeference.height}";
     }
 
     // Location Manager의 restaurantDB안의 restaurant와으 거리를 계산
@@ -183,8 +200,11 @@ public class GPSManager : MonoBehaviour
         LocationInfo location = Input.location.lastData;
         latitude = location.latitude;
         longtitude = location.longitude;
+        altitude = location.altitude;
 
         latitudeText.text = "Latitude: " + latitude.ToString();
         longtitudeText.text = "Longtitude: " + longtitude.ToString();
     }
+
+
 }

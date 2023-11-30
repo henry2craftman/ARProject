@@ -11,14 +11,15 @@ public class FirebaseManager : MonoBehaviour
 {
     [SerializeField] string dbURL;
     [SerializeField] GPSDataList data = new GPSDataList();
+    public GPSDataList Data {  get { return data; } }
+    [Serializable]
+    public class GPSDataList
+    {
+        public List<GPSData> gPS = new List<GPSData>();
+    }
+    public bool isReceived = false;
 
     private void Awake()
-    {
-        
-    }
-
-    // Start is called before the first frame update
-    void Start()
     {
         FirebaseApp.DefaultInstance.Options.DatabaseUrl = new System.Uri(dbURL);
 
@@ -57,23 +58,17 @@ public class FirebaseManager : MonoBehaviour
                 }
 
                 data = JsonUtility.FromJson<GPSDataList>(json);
+                isReceived = true;
             }
         }
-
-    }
-
-    [Serializable]
-    public class GPSDataList
-    {
-        public List<GPSData> gPS = new List<GPSData>();
     }
 
     private void SendData()
     {
         DatabaseReference dbRef = FirebaseDatabase.DefaultInstance.RootReference;
 
-        GPSData gps1 = new GPSData("Mammoth", 37.564652, 37.564652, false);
-        GPSData gps2 = new GPSData("Subway", 37.564652, 37.564652, false);
+        GPSData gps1 = new GPSData("Homeplus", 37.513647, 127.030041, 55, false);
+        GPSData gps2 = new GPSData("Yangjoo Wedding", 37.513301, 127.028982, 55, false);
 
         GPSDataList gpsList = new GPSDataList();
         gpsList.gPS.Add(gps1);
