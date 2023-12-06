@@ -1,5 +1,6 @@
 # Plane Detection
 <h2 id="table-of-contents">📝 Table of Contents</h2>
+
 - [Architecture](#architecture)
 - [Folder Structure](#folder-structure)
 - [Videos](#videos)
