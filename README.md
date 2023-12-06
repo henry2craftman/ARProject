@@ -22,7 +22,7 @@ AR Core & Firebase Demo 입니다.
 - AR Raycast Manager를 사용하여 바닥에 3D Object(Cyberpunk car)를 설치
 - 생성된 3D Object는 손가락 터치로 3D Object를 확대, 축소, 회전 가능
 - 자세한 내용은 Link를 클릭해 주세요.
-- 
+  
 <img src="Images/main1.jpg" width="25%" height="30%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
 
 ## :bulb: Face Detection [Link](https://github.com/henry2craftman/ARProject/tree/main/Assets/MainFolder/FaceDetection)
