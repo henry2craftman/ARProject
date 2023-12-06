@@ -7,7 +7,7 @@
 
 
 <h2 id="architecture">🌠 Architecture</h2>
-<img src="/Images/planeDetection.png" width="80%" height="80%" title="px(픽셀) 크기 설정" alt="Plane Detection"></img>
+<img src="/Images/planeDetection.png" width="70%" height="70%" title="px(픽셀) 크기 설정" alt="Plane Detection"></img>
 
 <h2 id="folder-structure">🌠 Folder Structure</h2>
  Plane Detection Demo 입니다.
