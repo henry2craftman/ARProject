@@ -7,7 +7,7 @@
 
 
 <h2 id="architecture">🌠 Architecture</h2>
-<img src="/Images/faceDetection.png" width="80%" height="80%" title="px(픽셀) 크기 설정" alt="Plane Detection"></img>
+<img src="/Images/faceDetection.png" width="30%" height="30%" title="px(픽셀) 크기 설정" alt="Plane Detection"></img>
 
 - AR Face Manager: AR Camera Manager로 부터 받은 이미지 정보에서 얼굴을 탐지
 - FacialFeature.cs: AR Face Manager의 얼굴 정보에서 468개의 얼굴 특징점의 정보를 기반으로 얼굴에 Mesh를 생성
