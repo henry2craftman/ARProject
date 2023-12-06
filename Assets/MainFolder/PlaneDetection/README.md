@@ -4,7 +4,7 @@
 - [Folder Structure](##folder-structure)
 - [Videos](##videos)
   
-## Architecture
+# Architecture
 <img src="/Images/planeDetection.png" width="80%" height="80%" title="px(픽셀) 크기 설정" alt="Plane Detection"></img>
 
 ## Folder Structure
