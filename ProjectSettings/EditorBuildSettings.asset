@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GeospatialWithFB.unity
+    path: Assets/MainFolder/GeoSpatial/Scenes/GeospatialWithFB.unity
     guid: fee01fe1847733e468308ba7b6acc555
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 26f188fa49b580843b27c3e439893a45, type: 2}
