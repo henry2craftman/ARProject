@@ -17,13 +17,13 @@ Plane Detection            |  Face Detection          |  Image Detection        
 AR Core & Firebase Demo 입니다.
 
 # :star: Part 1. Features
-## :bulb: Plane Detection [Link](https://github.com/henry2craftman/ARProject/Assets/MainFolder/PlaneDetection)
+## :bulb: Plane Detection [Link](https://github.com/henry2craftman/ARProject/tree/main/Assets/MainFolder/PlaneDetection)
 <img src="Images/main1.jpg" width="25%" height="30%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
-## :bulb: Face Detection [Link](https://github.com/henry2craftman/ARProject/Assets/MainFolder/FaceDetection)
+## :bulb: Face Detection [Link](https://github.com/henry2craftman/ARProject/tree/main/Assets/MainFolder/FaceDetection)
 <img src="Images/main1.jpg" width="25%" height="30%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
-## :bulb: Image Detection [Link](https://github.com/henry2craftman/ARProject/Assets/MainFolder/ImageDetection)
+## :bulb: Image Detection [Link](https://github.com/henry2craftman/ARProject/tree/main/Assets/MainFolder/ImageDetection)
 <img src="Images/main1.jpg" width="25%" height="30%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
-## :bulb: Firebase Database [Link](https://github.com/henry2craftman/ARProject/Assets/MainFolder/FirebaseDetection)
+## :bulb: Firebase Database [Link](https://github.com/henry2craftman/ARProject/tree/main/Assets/MainFolder/Firebase)
 <img src="Images/main1.jpg" width="25%" height="30%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
-## :bulb: Geospatial [Link](https://github.com/henry2craftman/ARProject/Assets/MainFolder/Geospatial)
+## :bulb: Geospatial [Link](https://github.com/henry2craftman/ARProject/tree/main/Assets/MainFolder/Geospatial)
 <img src="Images/main1.jpg" width="25%" height="30%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
