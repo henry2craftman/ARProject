@@ -1,7 +1,7 @@
 # AR Core & Firebase Demo
 Plane Detection            |  Face Detection          |  Image Detection          |  Firebase                |  Geospatial
 :-------------------------:|:------------------------:|:-------------------------:|:------------------------:|:-------------------------:|
-![](Images/main1.jpg)      |  ![](/Images/main2.jpg)  | ![](/Images/main2.jpg)    |  ![](/Images/main2.jpg)  | ![](/Images/main2.jpg)
+![](Images/planeDetectionApp.jpg)      |  ![](/Images/FaceDetectionApp.jpg)  | ![](/Images/ImageDetectionApp.jpg)    |  ![](/Images/main1.jpg)  | ![](/Images/GeospatialWithFBApp.jpg)
 
 <h2 id="table-of-contents">📝 Table of Contents</h2>
 
