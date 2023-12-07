@@ -16,7 +16,7 @@ Plane Detection            |  Face Detection          |  Image Detection        
 # :star: What is this?
 AR Core & Firebase Demo 입니다.
 
-# :star: Part 1. Features
+# :star: Features
 <h2 id="plane-detection"><a href="https://github.com/henry2craftman/ARProject/tree/main/Assets/MainFolder/PlaneDetection">💡 Plane Detection</a></h2>
 
 <!--## :bulb: Plane Detection [Link](https://github.com/henry2craftman/ARProject/tree/main/Assets/MainFolder/PlaneDetection)-->
