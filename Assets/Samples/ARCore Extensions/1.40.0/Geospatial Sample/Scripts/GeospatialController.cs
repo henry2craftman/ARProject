@@ -171,6 +171,8 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
         /// </summary>
         public Text DebugText;
 
+        public Button button;
+
         /// <summary>
         /// Help message shown while localizing.
         /// </summary>
@@ -444,6 +446,14 @@ namespace Google.XR.ARCoreExtensions.Samples.Geospatial
             {
                 Debug.LogError("Cannot find ARCoreExtensions.");
             }
+
+
+            button.onClick.AddListener(() => BackToMainScene());
+        }
+
+        void BackToMainScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
         }
 
         /// <summary>

@@ -27,6 +27,7 @@ public class AuthenticationManager : MonoBehaviour
     [Header("Verification Properties")]
     [SerializeField] GameObject verificationPanel;
     [SerializeField] TextMeshProUGUI verificationTxt;
+    public Button button;
 
     FirebaseAuth auth;
     FirebaseUser user;
@@ -35,6 +36,13 @@ public class AuthenticationManager : MonoBehaviour
     void Start()
     {
         InitializeAuthentication();
+
+        button.onClick.AddListener(() => BackToMainScene());
+    }
+
+    void BackToMainScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
     }
 
     /// <summary>
@@ -201,6 +209,7 @@ public class AuthenticationManager : MonoBehaviour
             if (user.IsEmailVerified)
             {
                 Debug.Log("로그인이 되었습니다.");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
             }
             else
             {

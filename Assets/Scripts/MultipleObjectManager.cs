@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
 public class MultipleObjectManager : MonoBehaviour
 {
     [SerializeField] ARTrackedImageManager imageManager;
     [SerializeField] TextMeshProUGUI logText;
+    public Button button;
 
     private void Start()
     {
@@ -16,6 +18,13 @@ public class MultipleObjectManager : MonoBehaviour
         imageManager.trackedImagesChanged += OnImageTrackedEvent;
 
         logText.text = "";
+
+        button.onClick.AddListener(() => BackToMainScene());
+    }
+
+    void BackToMainScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
     }
 
     void OnImageTrackedEvent(ARTrackedImagesChangedEventArgs args)

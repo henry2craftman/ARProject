@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARCore;
 using UnityEngine.XR.ARFoundation;
 
@@ -19,7 +20,9 @@ public class FacialFeature : MonoBehaviour
     NativeArray<ARCoreFaceRegionData> faceData;
     int currentState = 0;
     int maxState = 2;
-    
+
+    public Button button;
+
     void Start()
     {
         for(int i = 0; i < regionPosCnt; i++)
@@ -44,6 +47,13 @@ public class FacialFeature : MonoBehaviour
         faceManager.facesChanged += OnLocateIndicatorsOnEveryFeatures; // Total pose Àü¿ë
 
         currentState = maxState;
+
+        button.onClick.AddListener(() => BackToMainScene());
+    }
+
+    void BackToMainScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
     }
 
 

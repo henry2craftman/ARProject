@@ -6,6 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 0c93d0bbf6194514996ce91fd91a1c9d
+  - enabled: 1
+    path: Assets/Scenes/PlaneDetection.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/FaceDetectionWithMesh.unity
+    guid: 101a01224b458874d82929a7a4c56131
+  - enabled: 1
+    path: Assets/Scenes/ImageDetection.unity
+    guid: 5003648ce6da1044c9fe60cf2e7d980e
+  - enabled: 1
+    path: Assets/Scenes/FirebaseDemo.unity
+    guid: a5a640a5c902d7e4b900334425c37730
+  - enabled: 1
+    path: Assets/Scenes/Geospatial.unity
+    guid: 1ed15e9657253406185e4b2c7c5a4fc4
+  - enabled: 1
     path: Assets/Scenes/GeospatialWithFB.unity
     guid: fee01fe1847733e468308ba7b6acc555
   m_configObjects:

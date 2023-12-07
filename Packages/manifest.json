@@ -2,7 +2,10 @@
   "dependencies": {
     "com.cesium.unity": "1.6.4",
     "com.google.ar.core.arfoundation.extensions": "https://github.com/google-ar/arcore-unity-extensions.git",
+    "com.unity.2d.sprite": "1.0.0",
+    "com.unity.2d.spriteshape": "9.0.2",
     "com.unity.collab-proxy": "2.0.5",
+    "com.unity.feature.2d": "2.0.0",
     "com.unity.feature.development": "1.0.1",
     "com.unity.postprocessing": "3.2.2",
     "com.unity.textmeshpro": "3.0.6",

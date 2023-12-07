@@ -14,7 +14,6 @@ using UnityEngine.XR.ARFoundation;
 // 목적4: 포켓폴을 던지고 싶다.
 public class ObjectManager : MonoBehaviour
 {
-
     // 필요속성: Indicator GameObject
     public GameObject indicator;
     ARRaycastManager raycastManager;
@@ -38,6 +37,8 @@ public class ObjectManager : MonoBehaviour
     public Toggle toggle;
     bool toggleFlag = false;
 
+    public Button button;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -53,6 +54,13 @@ public class ObjectManager : MonoBehaviour
         editorPlane.SetActive(false);
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 #endif
+
+        button.onClick.AddListener(() => BackToMainScene());
+    }
+
+    void BackToMainScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");
     }
 
     // Update is called once per frame

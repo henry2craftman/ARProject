@@ -1,7 +1,7 @@
 {
   "project_info": {
     "project_number": "342169067578",
-    "firebase_url": "여기에 URL을 입력해 주세요.",
+    "firebase_url": "여기에 Firebase Database URL을 입력해 주세요.",
     "project_id": "arproject-533a0",
     "storage_bucket": "arproject-533a0.appspot.com"
   },
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCI3QCEkPYNXLmVv14a5vtNuUJa23YNR5g"
+          "current_key": "여기에 API Key를 입력해 주세요."
         }
       ],
       "services": {
